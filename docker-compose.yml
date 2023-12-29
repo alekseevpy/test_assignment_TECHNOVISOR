@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: yii2-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      - MYSQL_ROOT_PASSWORD=''
+      - MYSQL_DATABASE=operator_management
+    depends_on:
+      - mariadb
+    networks:
+      - yii2
+
+  mariadb:
+    image: mariadb:10.4
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'qwerty'
+      MYSQL_DATABASE: operator_management
+    networks:
+      - yii2
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./web:/var/www/html/web
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    networks:
+      - yii2
+
+networks:
+  yii2:
