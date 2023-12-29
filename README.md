@@ -25,9 +25,9 @@
    ```
    
 4. Проект будет доступен по следующим ссылкам:
-   <http://localhost/operator>
-   <http://localhost/car>
-   <http://localhost/operator-car>
+   - <http://localhost/operator>
+   - <http://localhost/car>
+   - <http://localhost/operator-car>
 
 5. Остановить и удалить контейнеры, тома и образы
     ```bash
